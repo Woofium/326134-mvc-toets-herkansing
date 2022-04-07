@@ -1,5 +1,5 @@
 <?php
-  class Rollercoasters {
+  class Rollercoaster {
     private $db;
 
     public function __construct() {
@@ -15,4 +15,4 @@
     }
   }
 
-?>
+?>  

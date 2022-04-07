@@ -2,19 +2,13 @@
 class RollerCoasters extends Controller {
 
   public function __construct() {
-    $this->rollercoasterModel = $this->model('Rollercoasters');
+    $this->RollerCoasterModel = $this->model('RollerCoaster');
   }
 
   public function index() {
-    /**
-     * Haal via de method getFruits() uit de model Fruit de records op
-     * uit de database
-     */
-    $rollercoasters = $this->rollercoasterModel->getRollercoasters();
 
-    /**
-     * Maak de inhoud voor de tbody in de view
-     */
+    $rollercoasters = $this->RollerCoasterModel->getRollercoasters();
+
     $rows = '';
     foreach ($rollercoasters as $value){
       $rows .= "<tr>
@@ -22,11 +16,10 @@ class RollerCoasters extends Controller {
                   <td>" . htmlentities($value->nameRollerCoaster, ENT_QUOTES, 'ISO-8859-1') . "</td>
                   <td>" . htmlentities($value->nameAmusementPark, ENT_QUOTES, 'ISO-8859-1') . "</td>
                   <td>" . htmlentities($value->country, ENT_QUOTES, 'ISO-8859-1') . "</td>
-                  <td>" . htmlentities($value->topspeed, ENT_QUOTES, 'ISO-8859-1') . "</td>
-                  <td>" . htmlentities($value->height, ENT_QUOTES, 'ISO-8859-1') . "</td>
+                  <td>" . number_format($value->topspeed, 0, ',', '.') . "</td>
+                  <td>" . number_format($value->height, 0, ',', '.') . "</td>
                 </tr>";
     }
-
 
     $data = [
       'title' => '<h1>De 5 snelste achtbanen van Europa</h1>',
@@ -34,6 +27,7 @@ class RollerCoasters extends Controller {
     ];
     $this->view('rollercoasters/index', $data);
   }
+  
 }
 
 ?>
